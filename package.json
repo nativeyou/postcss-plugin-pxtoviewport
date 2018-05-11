@@ -1,0 +1,22 @@
+{
+  "name": "postcss-plugin-pxtoviewport",
+  "version": "0.0.4",
+  "description": "px to vw and rem",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "postcss",
+    "plugin"
+  ],
+  "author": "gaoxm",
+  "license": "ISC",
+  "dependencies": {
+    "object-assign": "^4.1.1",
+    "postcss": "^6.0.22"
+  }
+}
