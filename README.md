@@ -20,6 +20,7 @@ h1 {
 
 // 输出
 h1 {
+    margin: 0 0 20px;
     margin: 0 0 1.25rem;
     margin: 0 0 5.33333vw;
     font-size: 2rem;
@@ -45,7 +46,8 @@ Default:
     mediaQuery: false,
     rootValue: 16,
     toRem: false,
-    toViewport: true
+    toViewport: true,
+    isSavePx: false
 }
 ```
 
@@ -54,6 +56,7 @@ Default:
 - `rootValue` (Number) 根节点字体大小。
 - `toRem` (Boolean) px是否可以转成rem。
 - `toViewport` (Boolean) px是否可以转为vw 或 vh。
+- `isSavePx` (Boolean) px是否保留。
 - `unitPrecision` (Number) 转换之后的精度。
 - `propList` (Array) 如果有些属性不想转为vw可以配置这个参数。
 - `selectorBlackList` (Array) 忽略转换的模块。

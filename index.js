@@ -15,7 +15,8 @@ const defaults = {
     mediaQuery: false, // 是否转换媒体查询
     rootValue: 16,      // 转换为rem的基础字号
     toRem: false,       // 是否转换为rem
-    toViewport: true    // 是否转换为vw 最好不要设置
+    toViewport: true,    // 是否转换为vw 最好不要设置
+    isSavePx: false         // 是否保留px
 };
 
 module.exports = postcss.plugin('postcss-plugin-px-to-viewport', options => {
@@ -37,6 +38,14 @@ module.exports = postcss.plugin('postcss-plugin-px-to-viewport', options => {
             if (opts.toViewport)
                 decl.value = declValue.replace(pxRegex, px2vwReplace);
 
+            if(opts.isSavePx && opts.toViewport){
+                if(pxRegex.test(declValue)){
+                    const cloned = decl.clone({value: declValue});
+                    if(decl.value === cloned.value) return
+                    decl.parent.insertBefore(decl, cloned);
+                }
+            }
+            
             if (opts.toRem) {
                 if (!isInBlackList && satisfyPropList(decl.prop) && opts.toViewport) {
                     const cloned = decl.clone({value: declValue.replace(pxRegex, px2remReplace)});
@@ -44,6 +53,14 @@ module.exports = postcss.plugin('postcss-plugin-px-to-viewport', options => {
                     decl.parent.insertBefore(decl, cloned)
                 } else {
                     decl.value = declValue.replace(pxRegex, px2remReplace)
+                }
+            }
+
+            if(opts.isSavePx && !opts.toViewport){
+                if(pxRegex.test(declValue)){
+                    const cloned = decl.clone({value: declValue});
+                    if(decl.value === cloned.value) return
+                    decl.parent.insertBefore(decl, cloned);
                 }
             }
         });
