@@ -23,6 +23,7 @@ h1 {
     margin: 0 0 20px;
     margin: 0 0 1.25rem;
     margin: 0 0 5.33333vw;
+    font-size: 32px;
     font-size: 2rem;
     font-size: 8.53333vw;
     line-height: 1.2;

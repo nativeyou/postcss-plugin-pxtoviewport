@@ -1,6 +1,6 @@
 {
   "name": "postcss-plugin-pxtoviewport",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "px to vw and rem",
   "main": "index.js",
   "directories": {

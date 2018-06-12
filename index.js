@@ -22,7 +22,7 @@ const defaults = {
 module.exports = postcss.plugin('postcss-plugin-px-to-viewport', options => {
     const opts = objectAssign({}, defaults, options);
     const px2vwReplace = createPx2Viewport(opts.viewportUnit === 'vw' ? opts.viewportWidth : opts.viewportHeight, opts.minPixelValue, opts.unitPrecision, opts.viewportUnit);
-    const px2remReplace = createPx2Rem(opts.viewportWidth, opts.rootValue, opts.minPixelValue, opts.unitPrecision);
+    const px2remReplace = createPx2Rem(opts.rootValue, opts.minPixelValue, opts.unitPrecision);
     const satisfyPropList = createPropListMatcher(opts.propList);
 
     return css => {
@@ -45,7 +45,7 @@ module.exports = postcss.plugin('postcss-plugin-px-to-viewport', options => {
                     decl.parent.insertBefore(decl, cloned);
                 }
             }
-            
+
             if (opts.toRem) {
                 if (!isInBlackList && satisfyPropList(decl.prop) && opts.toViewport) {
                     const cloned = decl.clone({value: declValue.replace(pxRegex, px2remReplace)});
@@ -87,7 +87,7 @@ function createPx2Viewport (viewportSize, minPixelValue, unitPrecision, viewport
     }
 }
 
-function createPx2Rem (viewportSize, rootValue, minPixelValue, unitPrecision) {
+function createPx2Rem (rootValue, minPixelValue, unitPrecision) {
     return (m, $1) => {
         if (!$1) return m;
 
